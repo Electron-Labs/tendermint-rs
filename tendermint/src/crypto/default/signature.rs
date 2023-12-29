@@ -201,6 +201,20 @@ mod tests {
         }
     }
 
+    #[test]
+
+    fn test_osmosis_tendermint_ed25519(){
+        let public_key: &[u8;32]= &[192, 29, 185, 74, 210, 241, 111, 57, 131, 210, 228, 226, 22, 33, 250, 199, 36, 153, 119, 65, 245, 222, 76, 154, 156, 213, 47, 190, 85, 41, 107, 126];
+        // let sig: &[u8;64] = &[8, 215, 112, 179, 119, 24, 130, 228, 110, 186, 6, 162, 74, 195, 149, 180, 202, 97, 118, 27, 175, 25, 72, 40, 42, 183, 136, 46, 141, 34, 42, 252, 156, 221, 85, 119, 89, 255, 202, 32, 176, 24, 119, 170, 249, 221, 237, 53, 25, 161, 44, 80, 104, 240, 8, 177, 178, 42, 32, 170, 90, 157, 244, 2];
+        let public_key = PublicKey::from_raw_ed25519(public_key).unwrap();
+            match public_key {
+                PublicKey::Ed25519(_) => {},
+                #[cfg(feature = "secp256k1")]
+                _ => panic!("expected public key to be Ed25519: {:?}", public_key),
+            }
+
+    }
+
     // Arbitrary "valid" tests taken from
     // https://github.com/google/wycheproof/blob/2196000605e45d91097147c9c71f26b72af58003/testvectors/ecdsa_secp256k1_sha256_test.json
     //
